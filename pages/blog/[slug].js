@@ -9,10 +9,10 @@ export const getStaticPaths = async () => {
     const res = await client.getEntries({
         content_type:'blog'
     });
-
+   
     const paths = res.items.map(item => {
         return {
-            params: {slug : item.fields.slug}
+            params: { slug : item.fields.slug}
         }
     })
 
@@ -25,7 +25,7 @@ export const getStaticPaths = async () => {
 export async function getStaticProps({params}){
     const {items} = await client.getEntries({
         content_type:'blog',
-        'fields.slug':params.slug
+        'fields.slug': params.slug
     });
 
     return{
@@ -37,9 +37,9 @@ export default function BlogDetails({blog}){
     return(
         <>
         <div>Blog Details</div>
-        <h1>{blog.title}</h1>
+        <h1>{blog.fields.title}</h1>
         <br/>
-        <p>{blog.description}</p>
+        <p>{blog.fields.description}</p>
         </>
     )
 }
